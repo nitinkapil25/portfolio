@@ -1,0 +1,129 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply bg-bg-base text-text-primary font-body;
+    font-feature-settings: 'cv11', 'ss01', 'ss03';
+  }
+
+  ::selection {
+    @apply bg-accent/30 text-text-primary;
+  }
+
+  /* Focus ring — visible, accessible, on-brand */
+  *:focus-visible {
+    @apply outline-none ring-2 ring-accent ring-offset-2 ring-offset-bg-base;
+  }
+
+  /* Smooth scroll snap for nav */
+  html {
+    scroll-padding-top: 80px;
+  }
+
+  /* Reduce motion preference */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  /* Container */
+  .container-content {
+    @apply mx-auto w-full max-w-content px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Section spacing — PRD §6.4 */
+  .section {
+    @apply py-16 sm:py-20 lg:py-24;
+  }
+
+  /* Subtle hairline */
+  .hairline {
+    @apply border-t border-border-subtle;
+  }
+
+  /* Link with animated underline — PRD §6.3 */
+  .link-underline {
+    @apply relative inline-block;
+  }
+  .link-underline::after {
+    content: '';
+    @apply absolute bottom-0 left-0 h-px w-full origin-left scale-x-0 bg-current transition-transform duration-200 ease-smooth-out;
+  }
+  .link-underline:hover::after {
+    @apply scale-x-100;
+  }
+
+  /* Skill chip variants — PRD §6.5 */
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-full border px-3 py-1 font-mono text-xs transition-colors duration-200;
+  }
+  .chip-decoded {
+    @apply border-border-subtle bg-bg-elevated text-text-primary;
+  }
+  .chip-decoding {
+    @apply border-status-warning/40 bg-status-warning/5 text-status-warning;
+  }
+  .chip-queued {
+    @apply border-border-subtle bg-transparent text-text-muted;
+  }
+
+  /* Status dot */
+  .status-dot {
+    @apply inline-block h-2 w-2 rounded-full;
+  }
+  .status-dot-active {
+    @apply bg-status-success animate-pulse-dot;
+  }
+  .status-dot-paused {
+    @apply bg-status-warning;
+  }
+  .status-dot-queued {
+    @apply bg-status-queued;
+  }
+
+  /* "Decoding" eyebrow — PRD §3.3 */
+  .eyebrow {
+    @apply inline-flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-text-muted;
+  }
+  .eyebrow::before {
+    content: '';
+    @apply h-px w-6 bg-border-subtle;
+  }
+}
+
+@layer utilities {
+  /* Hide scrollbar but allow scroll — for archive overflow */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  /* Gradient text for accent moments */
+  .text-gradient-accent {
+    @apply bg-gradient-to-br from-accent via-accent-hover to-accent-muted bg-clip-text text-transparent;
+  }
+}
