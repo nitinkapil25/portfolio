@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
  * Hero signature moment — PRD §6.3:
  * "Hero: the code snippet types character by character (2s total, variable speed)."
  *
- * Source: actual DevTrail code from Nitin's project (paraphrased for clarity).
+ * Source: a compact live snapshot of Nitin's current focus.
  */
 
 type TokenType = 'keyword' | 'string' | 'comment' | 'fn' | 'var' | 'punct' | 'text';
@@ -33,7 +33,7 @@ const codeLines: { tokens: { type: TokenType; text: string }[] }[] = [
     tokens: [
       { type: 'text', text: '  building' },
       { type: 'punct', text: ': ' },
-      { type: 'string', text: "'DevTrail v3'" },
+      { type: 'string', text: "'DevTrail'" },
       { type: 'punct', text: ',' },
     ],
   },
@@ -41,7 +41,7 @@ const codeLines: { tokens: { type: TokenType; text: string }[] }[] = [
     tokens: [
       { type: 'text', text: '  status' },
       { type: 'punct', text: ': ' },
-      { type: 'string', text: "'shipping fast'" },
+      { type: 'string', text: "'Shipping fast'" },
       { type: 'punct', text: ',' },
     ],
   },
@@ -49,7 +49,7 @@ const codeLines: { tokens: { type: TokenType; text: string }[] }[] = [
     tokens: [
       { type: 'text', text: '  vibe' },
       { type: 'punct', text: ': ' },
-      { type: 'string', text: "'decoding the digital world'" },
+      { type: 'string', text: "'Building useful products'" },
     ],
   },
   {
@@ -121,23 +121,23 @@ export function TypingCode() {
   }
 
   return (
-    <div className="relative overflow-hidden rounded-card border border-border-subtle bg-bg-elevated font-mono text-sm shadow-2xl shadow-black/40">
+    <div className="relative overflow-hidden rounded-2xl border border-violet-400/25 bg-[#0b0b11]/85 font-mono text-[10px] shadow-[0_24px_80px_rgba(0,0,0,0.65),0_0_50px_rgba(124,58,237,0.08)] backdrop-blur-2xl sm:text-xs">
       {/* Window chrome */}
-      <div className="flex items-center gap-2 border-b border-border-subtle bg-bg-hover/50 px-4 py-3">
+      <div className="flex items-center gap-2 border-b border-white/[0.07] bg-white/[0.025] px-4 py-3">
         <span className="h-2.5 w-2.5 rounded-full bg-[#FF5F57]" aria-hidden />
         <span className="h-2.5 w-2.5 rounded-full bg-[#FEBC2E]" aria-hidden />
         <span className="h-2.5 w-2.5 rounded-full bg-[#28C840]" aria-hidden />
         <span className="ml-3 font-mono text-xs text-text-faint">
-          ~/nitin/build.js
+          nitinDev.js
         </span>
       </div>
 
       {/* Code body */}
-      <div className="min-h-[260px] p-6">
+      <div className="min-h-[165px] p-4 sm:min-h-[185px] sm:p-4">
         <pre className="leading-relaxed">
           {rendered.map((line, li) => (
             <div key={li} className="flex">
-              <span className="mr-4 inline-block w-6 select-none text-right font-mono text-xs text-text-faint">
+              <span className="mr-3 inline-block w-5 select-none text-right font-mono text-[10px] text-text-faint sm:mr-4 sm:w-6 sm:text-xs">
                 {li + 1}
               </span>
               <span>
