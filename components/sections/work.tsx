@@ -123,6 +123,25 @@ export function Work() {
             />
           ))}
         </div>
+
+        {/* View all repositories button */}
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="mt-12 flex justify-center"
+        >
+          <a
+            href="https://github.com/nitinkapil25?tab=repositories"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group inline-flex items-center gap-2 rounded-full border border-border-subtle bg-bg-elevated/40 px-6 py-3 text-sm font-mono font-medium text-text-muted backdrop-blur-md transition duration-300 hover:-translate-y-1 hover:border-accent/40 hover:bg-accent/5 hover:text-text-primary hover:shadow-[0_8px_30px_rgba(124,58,237,0.15)]"
+          >
+            <span>View all repositories</span>
+            <Github size={16} className="text-accent transition-transform group-hover:scale-110" />
+          </a>
+        </motion.div>
       </div>
 
       {/* Floating Project Image Hover Preview */}

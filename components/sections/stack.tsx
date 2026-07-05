@@ -2,9 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
-import { Reveal } from '@/components/ui/reveal';
 import { SectionHeader } from '@/components/ui/section-header';
-import { stack } from '@/content/stack';
 
 // 12 skills distributed evenly in a 360-degree circle (in radians)
 const floatingSkills = [
@@ -22,7 +20,7 @@ const floatingSkills = [
   { name: 'JavaScript', short: 'JS', color: '#f7df1e', angle: (11 * Math.PI) / 6 },
 ];
 
-function Eyeball({ mouseX, mouseY }: { mouseX: any; mouseY: any }) {
+function Eyeball({ mouseX, mouseY, isMobile }: { mouseX: any; mouseY: any; isMobile: boolean }) {
   const ref = useRef<HTMLDivElement>(null);
   const pupilX = useMotionValue(0);
   const pupilY = useMotionValue(0);
@@ -45,8 +43,8 @@ function Eyeball({ mouseX, mouseY }: { mouseX: any; mouseY: any }) {
       const dy = my - eyeY;
 
       const angle = Math.atan2(dy, dx);
-      // Constrain pupil range inside eye outline
-      const maxRadius = 22;
+      // Constrain pupil range inside eye outline (smaller movement radius on mobile)
+      const maxRadius = isMobile ? 12 : 22;
       const distance = Math.min(maxRadius, Math.sqrt(dx * dx + dy * dy) * 0.08);
 
       pupilX.set(Math.cos(angle) * distance);
@@ -60,22 +58,22 @@ function Eyeball({ mouseX, mouseY }: { mouseX: any; mouseY: any }) {
       unsubscribeX();
       unsubscribeY();
     };
-  }, [mouseX, mouseY, pupilX, pupilY]);
+  }, [mouseX, mouseY, pupilX, pupilY, isMobile]);
 
   return (
     <div
       ref={ref}
-      className="w-24 h-24 md:w-28 md:h-28 rounded-full bg-white flex items-center justify-center relative border-4 border-neutral-800 shadow-[inset_0_4px_8px_rgba(0,0,0,0.15)] shrink-0"
+      className="w-16 h-16 md:w-28 md:h-28 rounded-full bg-white flex items-center justify-center relative border-[3px] md:border-4 border-neutral-800 shadow-[inset_0_3px_6px_rgba(0,0,0,0.15)] shrink-0"
     >
       <motion.div
         style={{ x: smoothX, y: smoothY }}
-        className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-neutral-900 flex flex-col items-center justify-center relative text-[5px] md:text-[6px] text-white font-black tracking-widest text-center select-none p-1.5 leading-tight"
+        className="w-8 h-8 md:w-14 md:h-14 rounded-full bg-neutral-900 flex flex-col items-center justify-center relative text-[3px] md:text-[6px] text-white font-black tracking-widest text-center select-none p-0.5 md:p-1.5 leading-tight"
       >
         <span>HOVER TO</span>
         <span>REVEAL</span>
         <span>SKILLS</span>
         {/* Eye highlight glint */}
-        <div className="absolute top-1.5 right-1.5 w-3 h-3 rounded-full bg-white" />
+        <div className="absolute top-0.5 right-0.5 md:top-1.5 md:right-1.5 w-1.5 h-1.5 md:w-3 md:h-3 rounded-full bg-white" />
       </motion.div>
     </div>
   );
@@ -85,15 +83,16 @@ function FloatingSkillCard({
   skill,
   localX,
   localY,
-  baseRadius,
-  bulge,
+  isMobile,
 }: {
   skill: typeof floatingSkills[0];
   localX: any;
   localY: any;
-  baseRadius: number;
-  bulge: number;
+  isMobile: boolean;
 }) {
+  const baseRadius = isMobile ? 110 : 230;
+  const bulge = isMobile ? 20 : 45;
+
   // Motion values for the card's visual states, initialized at default base positions
   const cardX = useMotionValue(Math.cos(skill.angle) * baseRadius);
   const cardY = useMotionValue(Math.sin(skill.angle) * baseRadius);
@@ -134,6 +133,9 @@ function FloatingSkillCard({
       sharpFactorValue.set(sharpFactor);
     };
 
+    // Trigger update on initialization to snap instantly to responsive sizes
+    updateCard();
+
     const unsubscribeX = localX.on('change', updateCard);
     const unsubscribeY = localY.on('change', updateCard);
 
@@ -169,7 +171,7 @@ function FloatingSkillCard({
     >
       {/* Ambient Neon Backlight Glow */}
       <motion.div
-        className="absolute inset-0 -z-10 rounded-2xl filter blur-xl"
+        className="absolute inset-0 -z-10 rounded-xl md:rounded-2xl filter blur-md md:blur-xl"
         style={{
           backgroundColor: skill.color,
           opacity: glowOpacity,
@@ -179,19 +181,19 @@ function FloatingSkillCard({
 
       {/* Square Card Design */}
       <motion.div
-        className="w-16 h-16 md:w-20 md:h-20 rounded-2xl flex flex-col justify-center items-center border bg-bg-elevated/95 p-2 shadow-lg backdrop-blur-md transition-colors"
+        className="w-12 h-12 md:w-20 md:h-20 rounded-xl md:rounded-2xl flex flex-col justify-center items-center border bg-bg-elevated/95 p-1 md:p-2 shadow-lg backdrop-blur-md transition-colors"
         style={{
           borderColor: borderColor,
           boxShadow: boxShadow,
         }}
       >
         <span
-          className="font-display text-lg md:text-xl font-black tracking-tight"
+          className="font-display text-xs md:text-xl font-black tracking-tight"
           style={{ color: skill.color }}
         >
           {skill.short}
         </span>
-        <span className="text-[7px] md:text-[8px] font-mono font-medium text-text-muted mt-1 uppercase tracking-wider text-center line-clamp-1 w-full">
+        <span className="text-[5px] md:text-[8px] font-mono font-medium text-text-muted mt-0.5 md:mt-1 uppercase tracking-wider text-center line-clamp-1 w-full">
           {skill.name}
         </span>
       </motion.div>
@@ -201,6 +203,7 @@ function FloatingSkillCard({
 
 export function Stack() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
 
   // Track global coordinates for eyeballs
   const mouseX = useMotionValue(-200);
@@ -209,6 +212,15 @@ export function Stack() {
   // Track local coordinates for skills highlight cone (bypasses React renders)
   const localX = useMotionValue(0);
   const localY = useMotionValue(0);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   useEffect(() => {
     const handleGlobalMouseMove = (e: MouseEvent) => {
@@ -224,8 +236,31 @@ export function Stack() {
         localY.set(y);
       }
     };
+
+    const handleGlobalTouchMove = (e: TouchEvent) => {
+      if (e.touches.length === 0) return;
+      const touch = e.touches[0];
+      mouseX.set(touch.clientX);
+      mouseY.set(touch.clientY);
+
+      if (containerRef.current) {
+        const rect = containerRef.current.getBoundingClientRect();
+        const x = touch.clientX - rect.left - rect.width / 2;
+        const y = touch.clientY - rect.top - rect.height / 2;
+        localX.set(x);
+        localY.set(y);
+      }
+    };
+
     window.addEventListener('mousemove', handleGlobalMouseMove);
-    return () => window.removeEventListener('mousemove', handleGlobalMouseMove);
+    window.addEventListener('touchmove', handleGlobalTouchMove, { passive: true });
+    window.addEventListener('touchstart', handleGlobalTouchMove, { passive: true });
+
+    return () => {
+      window.removeEventListener('mousemove', handleGlobalMouseMove);
+      window.removeEventListener('touchmove', handleGlobalTouchMove);
+      window.removeEventListener('touchstart', handleGlobalTouchMove);
+    };
   }, [mouseX, mouseY, localX, localY]);
 
   return (
@@ -240,12 +275,12 @@ export function Stack() {
         {/* Interactive Eyeballs trail arena (fully transparent and borderless) */}
         <div
           ref={containerRef}
-          className="relative h-[540px] w-full max-w-[800px] mx-auto flex items-center justify-center overflow-visible mb-8 group/eyes cursor-default"
+          className="relative h-[320px] md:h-[540px] w-full max-w-[800px] mx-auto flex items-center justify-center overflow-visible mb-8 group/eyes cursor-default"
         >
           {/* Eyeballs */}
-          <div className="flex gap-4 z-10 relative">
-            <Eyeball mouseX={mouseX} mouseY={mouseY} />
-            <Eyeball mouseX={mouseX} mouseY={mouseY} />
+          <div className="flex gap-2 md:gap-4 z-10 relative">
+            <Eyeball mouseX={mouseX} mouseY={mouseY} isMobile={isMobile} />
+            <Eyeball mouseX={mouseX} mouseY={mouseY} isMobile={isMobile} />
           </div>
 
           {/* Direction-highlighted tech chips (high-performance rendering) */}
@@ -255,39 +290,8 @@ export function Stack() {
               skill={skill}
               localX={localX}
               localY={localY}
-              baseRadius={230}
-              bulge={45}
+              isMobile={isMobile}
             />
-          ))}
-        </div>
-
-        {/* Structured categorized rows */}
-        <div className="max-w-4xl border-t border-border-subtle divide-y divide-border-subtle">
-          {stack.map((category, ci) => (
-            <Reveal key={category.title} delay={ci * 0.04}>
-              <motion.div
-                whileHover={{ x: 6 }}
-                transition={{ type: 'spring', stiffness: 260, damping: 20 }}
-                className="py-6 flex flex-col md:flex-row md:items-baseline gap-4 md:gap-12 cursor-default group"
-              >
-                {/* Category Title */}
-                <h3 className="eyebrow md:w-48 md:shrink-0 text-text-primary transition-colors group-hover:text-accent font-mono text-xs uppercase tracking-widest">
-                  {category.title}
-                </h3>
-                
-                {/* Skill List */}
-                <div className="flex-1 flex flex-wrap gap-x-3 gap-y-1.5 text-base font-mono text-text-muted">
-                  {category.skills.map((skill, index) => (
-                    <span key={skill.name} className="hover:text-text-primary transition-colors cursor-default">
-                      {skill.name}
-                      {index < category.skills.length - 1 && (
-                        <span className="text-text-faint/50 ml-3">•</span>
-                      )}
-                    </span>
-                  ))}
-                </div>
-              </motion.div>
-            </Reveal>
           ))}
         </div>
       </div>

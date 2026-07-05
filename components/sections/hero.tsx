@@ -148,8 +148,8 @@ export function Hero() {
           </p>
 
           <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.65, duration: 0.65 }} className="mt-6 flex flex-wrap gap-3">
-            <a href="#work" className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-indigo-600 to-fuchsia-500 px-5 py-2.5 text-sm font-semibold text-white shadow-[0_12px_35px_rgba(124,58,237,0.28)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_18px_45px_rgba(124,58,237,0.4)]">
-              View Projects <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
+            <a href="#work" className="group inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-neutral-950 shadow-[0_10px_30px_rgba(255,255,255,0.12)] transition duration-300 hover:-translate-y-1 hover:bg-neutral-200 hover:shadow-[0_15px_35px_rgba(255,255,255,0.2)]">
+              View Projects <ArrowRight size={16} className="text-neutral-950 transition-transform group-hover:translate-x-1" />
             </a>
             <a href="#about" className="group inline-flex items-center gap-2 rounded-full border border-border-subtle bg-bg-elevated px-5 py-2.5 text-sm font-medium text-text-muted backdrop-blur-md transition duration-300 hover:-translate-y-1 hover:border-accent/40 hover:bg-accent/5 hover:text-text-primary">
               About Me <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />

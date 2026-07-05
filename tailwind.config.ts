@@ -10,14 +10,14 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Sleek dark theme palette
+        // Sleek dark theme palette (pure neutral matte charcoal to match reference)
         bg: {
-          base: '#090A0C',
-          elevated: '#111215',
-          hover: '#181A1F',
+          base: '#121212',
+          elevated: '#1a1a1a',
+          hover: '#222222',
         },
         border: {
-          subtle: '#1F2229',
+          subtle: '#2a2a2a',
         },
         text: {
           primary: '#F1F5F9',
