@@ -7,8 +7,7 @@ import { site } from '@/content/site';
 import { Menu, X } from 'lucide-react';
 
 const navItems = [
-  { label: 'Decoding', href: '#about' },
-  { label: 'Now', href: '#now' },
+  { label: 'About', href: '#about' },
   { label: 'Work', href: '#work' },
   { label: 'Stack', href: '#stack' },
   { label: 'Journey', href: '#journey' },
@@ -53,8 +52,7 @@ export function Nav() {
           href="#top"
           className="link-underline font-display text-base font-semibold tracking-tight text-text-primary"
         >
-          {site.name}
-          <span className="text-accent">.</span>
+          Nit<span className="text-accent">.</span>Dev
         </a>
 
         {/* Desktop nav */}

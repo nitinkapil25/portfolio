@@ -10,29 +10,29 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // PRD §6.2 — dark theme palette
+        // Sleek dark theme palette
         bg: {
-          base: '#0A0A0B',
-          elevated: '#131316',
-          hover: '#1C1C20',
+          base: '#090A0C',
+          elevated: '#111215',
+          hover: '#181A1F',
         },
         border: {
-          subtle: '#26262C',
+          subtle: '#1F2229',
         },
         text: {
-          primary: '#EDEDEF',
-          muted: '#8B8B92',
-          faint: '#5A5A60',
+          primary: '#F1F5F9',
+          muted: '#94A3B8',
+          faint: '#475569',
         },
         accent: {
-          DEFAULT: '#A78BFA',
-          hover: '#B8A0FB',
-          muted: '#7C6BC9',
+          DEFAULT: '#6366F1',
+          hover: '#4F46E5',
+          muted: '#312E81',
         },
         status: {
-          success: '#34D399',
-          warning: '#FBBF24',
-          queued: '#5A5A60',
+          success: '#10B981',
+          warning: '#D97706',
+          queued: '#475569',
         },
       },
       fontFamily: {

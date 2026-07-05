@@ -121,7 +121,7 @@ export function TypingCode() {
   }
 
   return (
-    <div className="relative overflow-hidden rounded-2xl border border-violet-400/25 bg-[#0b0b11]/85 font-mono text-[10px] shadow-[0_24px_80px_rgba(0,0,0,0.65),0_0_50px_rgba(124,58,237,0.08)] backdrop-blur-2xl sm:text-xs">
+    <div className="relative overflow-hidden rounded-2xl border border-border-subtle bg-[#0b0b11]/85 font-mono text-[10px] shadow-[0_24px_80px_rgba(0,0,0,0.65)] backdrop-blur-2xl sm:text-xs">
       {/* Window chrome */}
       <div className="flex items-center gap-2 border-b border-white/[0.07] bg-white/[0.025] px-4 py-3">
         <span className="h-2.5 w-2.5 rounded-full bg-[#FF5F57]" aria-hidden />
@@ -182,12 +182,6 @@ export function TypingCode() {
           )}
         </pre>
       </div>
-
-      {/* Subtle corner glow */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -top-12 -right-12 h-40 w-40 rounded-full bg-accent/10 blur-3xl"
-      />
     </div>
   );
 }

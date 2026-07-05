@@ -83,14 +83,20 @@ export function TechBadge({ tech, index, active }: { tech: TechBadgeData; index:
         animate={active && !reduce ? floatMotion[tech.float] : undefined}
         transition={{ duration: tech.duration, repeat: Infinity, ease: 'easeInOut', delay: index * 0.14 }}
         whileHover={reduce ? undefined : { scale: 1.1, rotate: 0 }}
-        className="group flex cursor-pointer items-center gap-1.5 rounded-xl border border-white/[0.08] bg-[#0d0d12]/70 px-2.5 py-1.5 text-white/90 shadow-[0_10px_35px_rgba(0,0,0,0.38)] backdrop-blur-xl transition-[border-color,box-shadow] hover:border-white/20 hover:shadow-[0_0_30px_var(--badge-glow)]"
-        style={{ '--badge-glow': `${tech.color}32`, color: tech.color } as React.CSSProperties}
+        className="group relative flex cursor-pointer items-center gap-1.5 rounded-xl border border-border-subtle bg-bg-elevated/80 px-2.5 py-1.5 text-text-primary shadow-[0_10px_25px_rgba(0,0,0,0.35)] backdrop-blur-xl transition-[border-color,box-shadow,transform] duration-300 hover:border-accent/40"
+        style={{ color: tech.color } as React.CSSProperties}
         role="img"
         aria-label={tech.name}
         tabIndex={0}
       >
+        {/* Ambient Neon Backlight Glow on hover */}
+        <div
+          className="absolute inset-0 -z-10 rounded-xl filter blur-lg opacity-0 transition-opacity duration-300 group-hover:opacity-35"
+          style={{ backgroundColor: tech.color }}
+        />
+
         <BrandMark tech={tech} />
-        <span className="hidden whitespace-nowrap text-[10px] font-medium text-white/80 sm:block lg:text-[11px]">{tech.name}</span>
+        <span className="hidden whitespace-nowrap text-[10px] font-medium text-text-muted group-hover:text-text-primary transition-colors sm:block lg:text-[11px]">{tech.name}</span>
       </motion.div>
     </motion.div>
   );

@@ -23,6 +23,20 @@ export const journey: JourneyEntry[] = [
     status: 'in-progress',
   },
   {
+    date: '2024',
+    title: 'Network Security Associate — Virtual Internship',
+    org: 'AICTE + EduSkills',
+    description: 'Foundations of network security, threat modeling, defensive patterns.',
+    status: 'completed',
+  },
+  {
+    date: '2024',
+    title: 'Hashgraph Developer Course',
+    org: 'The Hashgraph Association',
+    description: 'Distributed ledger fundamentals. Different paradigm from traditional blockchains.',
+    status: 'completed',
+  },
+  {
     date: 'Oct 2024',
     title: 'HACK4SDG Finalist',
     org: 'IIT Hyderabad · AIESEC',
@@ -41,31 +55,5 @@ export const journey: JourneyEntry[] = [
     description: 'LLM integration certification. Credential ID 7288380.',
     link: { label: 'Credential', href: 'https://trailhead.salesforce.com' },
     status: 'completed',
-  },
-  {
-    date: '2024',
-    title: 'Network Security Associate — Virtual Internship',
-    org: 'AICTE + EduSkills',
-    description: 'Foundations of network security, threat modeling, defensive patterns.',
-    status: 'completed',
-  },
-  {
-    date: '2024',
-    title: 'Hashgraph Developer Course',
-    org: 'The Hashgraph Association',
-    description: 'Distributed ledger fundamentals. Different paradigm from traditional blockchains.',
-    status: 'completed',
-  },
-  {
-    date: 'mid-2026',
-    title: 'DevTrail — v1 → v3',
-    org: 'Personal',
-    description:
-      'Iterated three times. Each version sharper than the last. Currently mid-flight on v3.',
-    link: {
-      label: 'GitHub',
-      href: 'https://github.com/nitinkapil25/devtrail3',
-    },
-    status: 'in-progress',
   },
 ];

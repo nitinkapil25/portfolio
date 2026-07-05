@@ -26,6 +26,7 @@ export interface Project {
   era: string; // for archive grouping
   featured?: boolean;
   reverse?: boolean; // alternates card layout on featured
+  image?: string;
 }
 
 export const projects: Project[] = [
@@ -79,6 +80,7 @@ export const projects: Project[] = [
     era: '2026 Q2 — shipping real things',
     featured: true,
     reverse: false,
+    image: '/projects/devtrail.png',
   },
   {
     slug: 'notion-clone',
@@ -121,6 +123,7 @@ export const projects: Project[] = [
     era: '2026 Q2 — shipping real things',
     featured: true,
     reverse: true,
+    image: '/projects/notion.png',
   },
 
   // ---------- TIER A — NOTABLE ----------
@@ -137,14 +140,18 @@ export const projects: Project[] = [
   },
   {
     slug: 'live-chat-app',
-    name: 'live-chat-app',
+    name: 'Live Chat App',
     repo: 'https://github.com/nitinkapil25/live-chat-app',
+    live: 'https://live-chat-app-delta.vercel.app/',
     language: 'TypeScript',
-    description: 'Real-time chat — sockets, presence, the works.',
+    description: 'Real-time group messaging channels with online user presence and typing indicators.',
+    tech: ['React', 'Node.js', 'Express', 'Socket.io', 'Tailwind CSS', 'TypeScript'],
     status: 'shipped',
-    tier: 'A',
+    tier: 'S',
     updatedAt: '2026-02-25',
     era: '2026 Q1 — trying things',
+    featured: true,
+    image: '/projects/live-chat.png',
   },
   {
     slug: 'ai-learning-assistant',
@@ -161,12 +168,16 @@ export const projects: Project[] = [
     slug: 'moodify',
     name: 'Moodify',
     repo: 'https://github.com/nitinkapil25/Moodify',
+    live: 'https://moodify-35cw.vercel.app/',
     language: 'JavaScript',
-    description: 'Mood-driven playlist / discovery app.',
+    description: 'Smart camera-based facial expression scanning to generate customized mood playlist music.',
+    tech: ['React', 'Node.js', 'Express', 'Face-API.js', 'Tailwind CSS', 'JavaScript'],
     status: 'shipped',
-    tier: 'A',
+    tier: 'S',
     updatedAt: '2026-01-31',
     era: '2026 Q1 — trying things',
+    featured: true,
+    image: '/projects/moodify.png',
   },
 
   // ---------- TIER B — FOUNDATION ----------

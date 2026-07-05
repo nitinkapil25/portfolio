@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import { Inter, JetBrains_Mono } from 'next/font/google';
 import { site } from '@/content/site';
+import { CustomCursor } from '@/components/ui/custom-cursor';
 import './globals.css';
 
 const inter = Inter({
@@ -16,7 +17,7 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const viewport: Viewport = {
-  themeColor: '#0A0A0B',
+  themeColor: '#090A0C',
   width: 'device-width',
   initialScale: 1,
 };
@@ -127,6 +128,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${jetbrains.variable}`}>
       <body className="bg-bg-base text-text-primary antialiased">
+        <CustomCursor />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

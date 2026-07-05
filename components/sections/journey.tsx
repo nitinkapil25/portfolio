@@ -1,71 +1,71 @@
 'use client';
 
-import { motion, useScroll } from 'framer-motion';
 import { useRef } from 'react';
+import { motion, useScroll, useSpring } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
 import { Reveal } from '@/components/ui/reveal';
 import { SectionHeader } from '@/components/ui/section-header';
 import { journey } from '@/content/journey';
-import { cn } from '@/lib/utils';
 
 export function Journey() {
   const containerRef = useRef<HTMLDivElement>(null);
+
+  // Scroll tracking to animate vertical line filling
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ['start 80%', 'end 30%'],
+    offset: ['start end', 'end center'],
   });
 
+  const scaleY = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
+
   return (
-    <section id="journey" className="section">
+    <section id="journey" className="section bg-bg-base">
       <div className="container-content">
         <SectionHeader
-          eyebrow="06 · the arc"
-          title="How I got here"
-          subtitle="Not a resume list — the story of how the work evolved."
+          eyebrow="05 · the arc"
+          title="Career Journey"
+          subtitle="A simplified timeline of my education, roles, and major projects."
         />
 
-        <div ref={containerRef} className="relative pl-6 sm:pl-10">
-          {/* Vertical line */}
-          <div
-            aria-hidden
-            className="absolute left-2 top-2 h-full w-px bg-border-subtle sm:left-4"
-          />
-          <motion.div
-            aria-hidden
-            style={{ scaleY: scrollYProgress }}
-            className="absolute left-2 top-2 h-full w-px origin-top bg-accent sm:left-4"
-          />
+        <div className="max-w-4xl" ref={containerRef}>
+          {/* Timeline Wrapper Container */}
+          <div className="relative pl-6 md:pl-8 border-l border-border-subtle/40 ml-4 md:ml-6 space-y-10">
+            {/* Scroll progress vertical overlay */}
+            <motion.div
+              style={{ scaleY }}
+              className="absolute left-[-1px] top-0 bottom-0 w-[1px] bg-accent origin-top"
+            />
 
-          <ol className="space-y-12">
             {journey.map((entry, i) => (
-              <Reveal key={i} delay={i * 0.04}>
-                <li className="relative">
-                  {/* Node */}
-                  <span
-                    aria-hidden
-                    className={cn(
-                      'absolute -left-[18px] top-1.5 h-3 w-3 rounded-full border-2 sm:-left-[24px]',
-                      entry.status === 'in-progress'
-                        ? 'border-accent bg-accent/30'
-                        : 'border-accent bg-bg-base'
-                    )}
-                  />
+              <Reveal key={i} delay={i * 0.05}>
+                <div className="relative group">
+                  {/* Timeline circular node (dot) aligned exactly on the border */}
+                  <div className="absolute left-[-31px] md:left-[-39px] top-1 w-3.5 h-3.5 rounded-full border-2 border-border-subtle bg-bg-base z-10 transition-all duration-300 group-hover:scale-110 group-hover:border-accent shadow-[0_0_8px_rgba(167,139,250,0)] group-hover:shadow-[0_0_10px_rgba(167,139,250,0.4)]" />
 
-                  <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:gap-4">
-                    <span className="font-mono text-xs text-text-faint sm:w-32 sm:shrink-0">
+                  <motion.div
+                    whileHover={{ x: 6 }}
+                    transition={{ type: 'spring', stiffness: 260, damping: 20 }}
+                    className="flex flex-col md:flex-row md:items-baseline gap-2 md:gap-8 cursor-default"
+                  >
+                    {/* Date / Year Column */}
+                    <span className="font-mono text-xs text-text-faint md:w-32 md:shrink-0 font-medium">
                       {entry.date}
                       {entry.endDate && entry.endDate !== entry.date && (
                         <> — {entry.endDate}</>
                       )}
                     </span>
+                    
+                    {/* Event details column */}
                     <div className="flex-1">
-                      <h3 className="font-display text-lg font-semibold text-text-primary">
-                        {entry.title}
-                      </h3>
-                      <div className="font-mono text-xs text-text-muted">
-                        {entry.org}
+                      <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
+                        <h3 className="font-display text-lg font-semibold text-text-primary group-hover:text-accent transition-colors">
+                          {entry.title}
+                        </h3>
+                        <span className="text-xs text-text-muted font-mono">
+                          at {entry.org}
+                        </span>
                       </div>
-                      <p className="mt-2 max-w-prose text-sm text-text-muted">
+                      <p className="mt-2 text-sm text-text-muted leading-relaxed max-w-prose">
                         {entry.description}
                       </p>
                       {entry.link && (
@@ -73,24 +73,23 @@ export function Journey() {
                           href={entry.link.href}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="mt-2 inline-flex items-center gap-1 font-mono text-xs text-accent transition-opacity hover:opacity-80"
+                          className="mt-2.5 inline-flex items-center gap-1 font-mono text-xs text-accent hover:underline"
                         >
                           {entry.link.label}
                           <ArrowUpRight size={12} />
                         </a>
                       )}
                     </div>
-                  </div>
-                </li>
+                  </motion.div>
+                </div>
               </Reveal>
             ))}
-          </ol>
+          </div>
 
-          <Reveal delay={0.2}>
-            <div className="mt-12 border-l-2 border-accent pl-4">
-              <p className="font-mono text-sm text-text-muted">
-                <span className="text-accent">→</span> Currently mid-flight. Next
-                chapter TBD.
+          <Reveal delay={0.15}>
+            <div className="mt-10 border-l border-accent pl-4 py-1 ml-4 md:ml-6">
+              <p className="font-mono text-xs text-text-muted">
+                Currently looking for new opportunities and engineering full-stack solutions.
               </p>
             </div>
           </Reveal>
