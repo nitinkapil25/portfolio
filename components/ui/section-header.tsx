@@ -29,7 +29,7 @@ export function SectionHeader({
       <div className={cn('eyebrow mb-4', align === 'center' && 'justify-center')}>
         {eyebrow}
       </div>
-      <h2 className="font-display text-section font-bold tracking-tight text-text-primary">
+      <h2 className="font-display text-section font-black tracking-tighter text-text-primary leading-[1.02]">
         {title}
       </h2>
       {subtitle && (

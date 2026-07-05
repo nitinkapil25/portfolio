@@ -57,7 +57,7 @@ export function Journey() {
                     
                     {/* Event details column */}
                     <div className="w-full">
-                      <h3 className="font-display text-xl font-bold text-text-primary group-hover:text-accent transition-colors mb-0.5">
+                      <h3 className="font-display text-xl font-extrabold text-text-primary group-hover:text-accent transition-colors mb-0.5 tracking-tight">
                         {entry.title}
                       </h3>
                       {entry.org && (

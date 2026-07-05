@@ -13,10 +13,10 @@ export function Connect() {
           <Reveal>
             <div>
               <div className="eyebrow mb-6">06 · say hi</div>
-              <h2 className="font-display text-section font-bold tracking-tight text-text-primary">
+              <h2 className="font-display text-section font-black tracking-tighter text-text-primary leading-[1.02]">
                 Want to build something?
               </h2>
-              <p className="mt-4 max-w-prose text-lg text-text-muted font-light leading-relaxed">
+              <p className="mt-4 max-w-prose text-lg text-text-muted font-normal leading-relaxed">
                 Collaborate? Freelance hire? Or just talk shop? Drop me an email — I read every message and usually respond within 24 hours.
               </p>
               <div className="mt-8 flex flex-wrap items-center gap-3">

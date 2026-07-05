@@ -29,14 +29,10 @@ export function About() {
           {/* Left Column: Headline, Bio and Belief Tags */}
           <div className="lg:col-span-7 flex flex-col justify-between">
             <div>
-              <Reveal>
-                <h2 className="font-display text-3xl md:text-4.5xl font-bold tracking-tight text-text-primary mb-6">
-                  Crafting Digital Experiences
-                </h2>
-              </Reveal>
+
 
               <RevealGroup>
-                <div className="space-y-6 text-base md:text-lg leading-relaxed text-text-primary/95 font-light">
+                <div className="space-y-6 text-base md:text-lg leading-relaxed text-text-muted font-normal">
                   {aboutContent.paragraphs.map((p, i) => (
                     <RevealItem key={i}>
                       <p>{p}</p>

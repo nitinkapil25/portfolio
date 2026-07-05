@@ -137,7 +137,7 @@ export function Hero() {
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           className="relative z-20 pt-4 lg:pt-0"
         >
-          <h1 className="font-display text-[clamp(3.6rem,6.5vw,6.25rem)] font-bold leading-[0.88] tracking-[-0.04em] text-text-primary">
+          <h1 className="font-display text-[clamp(3.6rem,6.5vw,6.25rem)] font-black leading-[0.88] tracking-[-0.04em] text-text-primary">
             <span className="block">Nitin</span>
             <span className="block">Kapil<span className="text-violet-500">.</span></span>
           </h1>
