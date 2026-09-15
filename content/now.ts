@@ -7,7 +7,7 @@
 type Status = 'active' | 'paused' | 'queued';
 
 export const nowContent = {
-  lastUpdated: '2026-07-02',
+  lastUpdated: '2026-09-15',
   intro:
     "A live status board. Updated when something shifts. If it looks stale, it's stale — ping me.",
   doing: [
@@ -23,7 +23,7 @@ export const nowContent = {
     },
     {
       label: 'College coursework',
-      detail: 'Semester 6, CGPA holding at 8.1',
+      detail: 'Semester 6, CGPA holding at 6.9',
       status: 'active' as Status,
     },
   ],

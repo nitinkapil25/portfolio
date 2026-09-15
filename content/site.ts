@@ -23,7 +23,7 @@ export const site = {
     // TODO: [OPEN] add X/Twitter, blog, etc. when available
   },
   // Last updated — drives the "alive" footer element
-  lastUpdated: '2026-07-02',
+  lastUpdated: '2026-09-15',
 };
 
 export type Social = keyof typeof site.socials;
